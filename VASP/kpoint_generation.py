@@ -1,3 +1,4 @@
+#!/usr/bin/env python 
 ##########################
 # This code is written for generation of K-meshes for VASP, i.e. KPOINTS
 # Developer : Do Hoon Kiem
