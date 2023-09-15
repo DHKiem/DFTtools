@@ -52,6 +52,8 @@ def generate_kmesh(inputfile):
     if os.path.isfile("KPOINTS"):
       if 'Y' == input("There exist ALREADY KPOINTS file. Do you want really rewrite KPOINTS? [y/N]\n=> ").upper():
         save_kpoints(ka,kb,kc)
+    else:
+      save_kpoints(ka,kb,kc)
   
   print("Finished. Thanks, See you again.")
   
