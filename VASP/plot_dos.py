@@ -8,7 +8,7 @@ plt.figure(figsize=(6,4))
 if len(data[0,:]) < 4:
   plt.plot(data[:,0], data[:,1], color='brown', lw=1.0)
 else:
-  plt.plot(data[:,0], data[:,1], color='lightred', lw=1.0)
+  plt.plot(data[:,0], data[:,1], color='orangered', lw=1.0)
   plt.plot(data[:,0], data[:,2], color='royalblue', lw=1.0)
 
 
