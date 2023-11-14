@@ -2,14 +2,15 @@
 ##########################
 # This code is written for generation of K-meshes for VASP, i.e. KPOINTS
 # Developer : Do Hoon Kiem
-# Last update : 2023-09-11
-version = "v0.1.2"
+# Last update : 2023-11-14
+version = "v0.1.3"
 ##########################
 
 import numpy as np
 from numpy import linalg as LA
 import sys
 import os 
+
 
 def generate_kmesh(inputfile):
   # reead poscar file lines
@@ -39,9 +40,13 @@ def generate_kmesh(inputfile):
   
   #print("Do not use this code for slab calculation.\n")
 
-  ka = LK/LA.norm(a)
-  kb = LK/LA.norm(b)
-  kc = LK/LA.norm(c)
+  #ka = LK/LA.norm(a)
+  #kb = LK/LA.norm(b)
+  #kc = LK/LA.norm(c)
+  
+  ka = LK/LA.norm(a) / np.cos(np.arctan2(LA.norm(np.cross(a,np.cross(b,c))),np.dot(a,np.cross(b,c))))
+  kb = LK/LA.norm(b) / np.cos(np.arctan2(LA.norm(np.cross(b,np.cross(c,a))),np.dot(b,np.cross(c,a))))
+  kc = LK/LA.norm(c) / np.cos(np.arctan2(LA.norm(np.cross(c,np.cross(a,b))),np.dot(c,np.cross(a,b))))
   
   ka=int(round(ka,0))
   kb=int(round(kb,0))
