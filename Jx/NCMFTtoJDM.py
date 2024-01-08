@@ -1,24 +1,36 @@
-#Developer : DH Kiem
+#!/usr/bin/env python 
+##########################
+# This code is written for analyzing NC-JX 
+# Developer : Do Hoon Kiem
+# Last update : 2024-01-09
+version = "v0.1.1"
+##########################
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+##### User inputs #####
 system_name = "SYSTEMNAME"
 atom1 = [1]   # target atom group1 
 atom2 = [1,2,3,4]  # target atom group2
 
+file_positions = ["to_x", "to_y", "to_z"] # clarify your Jx calculation directories with axes
 csv_file_write = "off" # on | off for saving csv file
+##### User inputs #####
+
 
 # Create subplots
 fig, axs = plt.subplots(1, 2, figsize=(10, 4))
 
+axs[0].axhline(linestyle='--')
 for a1 in atom1:
   for a2 in atom2:
     print("\natom1, atom2: ",a1," ", a2)
 
-    J_x = pd.read_csv(r"./to_x/jq.same.nc_allH_0.0/jq.same.nc_allH_"+system_name+"_atomij_"+str(a1)+"_"+str(a2)+"_[all_all]_ChemPdelta_0.0__NC.csv")
-    J_y = pd.read_csv(r"./to_y/jq.same.nc_allH_0.0/jq.same.nc_allH_"+system_name+"_atomij_"+str(a1)+"_"+str(a2)+"_[all_all]_ChemPdelta_0.0__NC.csv")
-    J_z = pd.read_csv(r"./to_z/jq.same.nc_allH_0.0/jq.same.nc_allH_"+system_name+"_atomij_"+str(a1)+"_"+str(a2)+"_[all_all]_ChemPdelta_0.0__NC.csv")
+    J_x = pd.read_csv(r"./"+file_positions[0]+"/jq.same.nc_allH_0.0/jq.same.nc_allH_"+system_name+"_atomij_"+str(a1)+"_"+str(a2)+"_[all_all]_ChemPdelta_0.0__NC.csv")
+    J_y = pd.read_csv(r"./"+file_positions[1]+"/jq.same.nc_allH_0.0/jq.same.nc_allH_"+system_name+"_atomij_"+str(a1)+"_"+str(a2)+"_[all_all]_ChemPdelta_0.0__NC.csv")
+    J_z = pd.read_csv(r"./"+file_positions[2]+"/jq.same.nc_allH_0.0/jq.same.nc_allH_"+system_name+"_atomij_"+str(a1)+"_"+str(a2)+"_[all_all]_ChemPdelta_0.0__NC.csv")
   
     Jxx = ( np.array(J_z.iloc[:,5]) + np.array(J_y.iloc[:,9]) )/2  
     Jyy = ( np.array(J_z.iloc[:,1]) + np.array(J_x.iloc[:,9]) )/2
@@ -113,5 +125,7 @@ plt.suptitle(system_name)
 plt.tight_layout()
 
 # Show the plot
+plt.savefig("result_JD.png")
 plt.show()
+
 
