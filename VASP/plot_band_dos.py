@@ -19,7 +19,7 @@ dosfile  = "../dos/TDOS.dat"
 
 linecolor = "forestgreen"
 
-y_range = [-8,10]
+E_range = [-8,10]
 dos_range = [0, 70]
 
 outputfigure = "banddos.png"
@@ -33,9 +33,9 @@ gs = GridSpec(1, 2, width_ratios=[2, 1])
 ax1 = fig.add_subplot(gs[0])
 ax2 = fig.add_subplot(gs[1])
 
-ax1.set_ylim(y_range)
-ax2.set_ylim(y_range)
-ax2.set_yticks(y_range,[" ", " "])
+ax1.set_ylim(E_range)
+ax2.set_ylim(E_range)
+ax2.set_yticks(E_range,[" ", " "])
 
 klabel_info = []
 
