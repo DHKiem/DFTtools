@@ -58,7 +58,7 @@ with open("../dos/OUTCAR", "r") as f:
             Efermi_scf  = float(match.group(1))
 
 print("Fermi Energy: ",Efermi_scf)
-correction_fermi =  Efermi_band - Efermi_scf 
+correction_fermi =  Efermi_scf - Efermi_band
 
 klabel_info = []
 

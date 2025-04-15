@@ -76,7 +76,7 @@ with open("../OUTCAR", "r") as f:
         if match:
             Efermi_scf  = float(match.group(1))
 
-correction_fermi =  Efermi_band - Efermi_scf 
+correction_fermi =  Efermi_scf - Efermi_band
 
 ax1.plot(data1[:,0], data1[:,1]- correction_fermi, color=linecolor)
 ax2.plot(data2[:,1], data2[:,0], color=linecolor)
