@@ -62,7 +62,7 @@ ax1.set_ylabel('Energy (eV)', fontsize = 14)
 ax2.set_xlabel('DOS (states/eV)', fontsize = 12)
 
 
-pattern = re.compile(r"alpha\+bet\s*:\s*([-+]?\d*\.\d+|\d+)")
+pattern = re.compile(r"E\-fermi\s*:\s*([-+]?\d*\.\d+|\d+)")
 Efermi_band = None
 Efermi_scf  = None
 with open("OUTCAR", "r") as f:

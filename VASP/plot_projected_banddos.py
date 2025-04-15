@@ -43,7 +43,7 @@ ax2.set_xlabel('DOS (states/eV)', fontsize = 12)
 
 
 ############ Figure config ############
-pattern = re.compile(r"alpha\+bet\s*:\s*([-+]?\d*\.\d+|\d+)")
+pattern = re.compile(r"E\-fermi\s*:\s*([-+]?\d*\.\d+|\d+)")
 Efermi_band = None
 Efermi_scf  = None
 with open("OUTCAR", "r") as f:
