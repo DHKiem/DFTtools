@@ -8,23 +8,25 @@
 ## vaspkit 111 at dos
 
 import numpy as np
-import matplotlib
+#import matplotlib
+#matplotlib.use('Agg') # if no xcb
 import matplotlib.pyplot as plt
-matplotlib.use('Agg')
 from matplotlib.gridspec import GridSpec
 import re
 
 bandfile = "BAND.dat"
 dosfile  = "../dos/TDOS.dat"
 
-linecolor = "forestgreen"
+linecolor = ["orangered","royalblue", "forestgreen"]
 
-E_range = [-8,10]
-dos_range = [0, 70]
+E_range = [-10,10]
+# dos_range = [0, 70] # if you want to set a specific range
 
 outputfigure = "banddos.png"
 
 ############ Figure config ############
+
+
 data1 = np.loadtxt(bandfile)
 data2 = np.loadtxt(dosfile)
 
@@ -54,7 +56,8 @@ print("Band range: ", band_range)
 print("k_label: ", k_label)
 print("k_label: ", k_label_coord)
 ax1.set_xlim(band_range)
-ax2.set_xlim(dos_range)
+if 'dos_range' in locals():
+  ax2.set_xlim(dos_range)
 
 ax1.set_xticks( k_label_coord ,  k_label)
 
@@ -78,11 +81,18 @@ with open("../OUTCAR", "r") as f:
 
 correction_fermi =  Efermi_scf - Efermi_band
 
-ax1.plot(data1[:,0], data1[:,1]- correction_fermi, color=linecolor)
-ax2.plot(data2[:,1], data2[:,0], color=linecolor)
+if len(data1[0,:])>2: 
+  print("Spin polarization detected.")
+  ax1.plot(data1[:,0], data1[:,1]- correction_fermi, color=linecolor[0])
+  ax2.plot(data2[:,1], data2[:,0], color=linecolor[0])
+  ax1.plot(data1[:,0], data1[:,2]- correction_fermi, color=linecolor[1])
+  ax2.plot(data2[:,2], data2[:,0], color=linecolor[1])
+else: 
+  ax1.plot(data1[:,0], data1[:,1]- correction_fermi, color=linecolor[2])
+  ax2.plot(data2[:,1], data2[:,0], color=linecolor[2])
 
 plt.tight_layout()
 plt.savefig(outputfigure)
 print("Output: ", outputfigure)
-#plt.show()
+plt.show()
 
