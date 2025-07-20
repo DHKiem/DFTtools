@@ -1,0 +1,7 @@
+.DS_Store
+VASP/band_path/BAND.dat
+VASP/band_path/EIGENVAL
+VASP/band_path/KPATH.in
+VASP/band_path/KPOINTS
+VASP/band_path/POSCAR
+VASP/band_path/kpath.jl
